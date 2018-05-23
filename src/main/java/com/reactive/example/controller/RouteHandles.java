@@ -35,13 +35,4 @@ public class RouteHandles {
                 .body(fluxCarService.streams(carId), CarEvents.class)
                 .doOnError(throwable -> new IllegalStateException("I give up!! "));
     }
-
-
-    @Bean
-    RouterFunction<?> routes(RouteHandles routeHandles) {
-        return RouterFunctions.route(
-                RequestPredicates.GET("/cars"), routeHandles::allCars)
-                .andRoute(RequestPredicates.GET("/cars/{carId}"), routeHandles::carById)
-                .andRoute(RequestPredicates.GET("/cars/{carId}/events"), routeHandles::events);
-    }
 }
